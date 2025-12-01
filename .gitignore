@@ -20,7 +20,8 @@
 exp
 
 # data
-dataset/*
+dataset/wm_videos/*
+dataset/Benchmark/*
 video_frames
 
 # vggt code

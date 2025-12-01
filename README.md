@@ -20,7 +20,7 @@
 If you find our work useful, please star ⭐ our repo!
 
 ## TODO &#128203;<a name="todo"></a>
-- [] Fine-tune code release (Scheduled 05 Dec)
+- [ ] Fine-tune code release (Scheduled 05 Dec)
 - [x] Benchmark code release
 - [x] Dataset release
 - [x] Paper release
