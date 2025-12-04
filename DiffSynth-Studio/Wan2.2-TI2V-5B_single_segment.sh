@@ -1,0 +1,16 @@
+accelerate launch --config_file examples/wanvideo/model_training/full/accelerate_config_14B.yaml examples/wanvideo/model_training/train.py \
+  --dataset_base_path ../dataset/data_single_segment_121_frames \
+  --dataset_metadata_path ../dataset/data_single_segment_121_frames/metadata.csv \
+  --height 704 \
+  --width 1280 \
+  --num_frames 121 \
+  --dataset_repeat 1 \
+  --model_id_with_origin_paths "Wan-AI/Wan2.2-TI2V-5B:diffusion_pytorch_model*.safetensors,Wan-AI/Wan2.2-TI2V-5B:models_t5_umt5-xxl-enc-bf16.pth,Wan-AI/Wan2.2-TI2V-5B:Wan2.2_VAE.pth" \
+  --learning_rate 1e-5 \
+  --num_epochs 100 \
+  --remove_prefix_in_ckpt "pipe.dit." \
+  --output_path "./models/train/Wan2.2-TI2V-5B_lora_single_segment_121_frames_continue" \
+  --lora_base_model "dit" \
+  --lora_target_modules "q,k,v,o,ffn.0,ffn.2" \
+  --lora_rank 32 \
+  --extra_inputs "input_image"
