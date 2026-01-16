@@ -14,7 +14,8 @@ model:
   confidence_percentile: 10
   resize_mode: "fixed_mapping"
   resolution_set: 518
-  frame_stride: 1
+  num_frames: 9
+  frame_stride: null
   max_frames: null
 
 visualization:

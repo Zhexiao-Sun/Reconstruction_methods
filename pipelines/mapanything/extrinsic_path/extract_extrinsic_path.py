@@ -6,6 +6,7 @@ import os
 import sys
 import glob
 import json
+import shutil
 from pathlib import Path
 
 import cv2
@@ -63,27 +64,46 @@ def setup_model(model_id, device):
     return model
 
 
-def extract_video_frames(video_path, output_dir, frame_stride=1, max_frames=None):
+def extract_video_frames(
+    video_path,
+    output_dir,
+    frame_stride=1,
+    max_frames=None,
+    num_frames=None,
+):
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     cap = cv2.VideoCapture(str(video_path))
     if not cap.isOpened():
         raise ValueError(f"Cannot open video: {video_path}")
 
-    frame_idx = 0
+    total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    if total_frames <= 0:
+        cap.release()
+        return 0
+
+    if num_frames is not None:
+        if total_frames <= num_frames:
+            frame_indices = list(range(total_frames))
+        else:
+            frame_indices = np.linspace(0, total_frames - 1, num_frames, dtype=int)
+    else:
+        if frame_stride is None or frame_stride <= 0:
+            frame_stride = 1
+        frame_indices = list(range(0, total_frames, frame_stride))
+        if max_frames is not None:
+            frame_indices = frame_indices[:max_frames]
+
     saved_idx = 0
-    while True:
+    for frame_idx in frame_indices:
+        cap.set(cv2.CAP_PROP_POS_FRAMES, int(frame_idx))
         ret, frame = cap.read()
         if not ret:
-            break
-        if frame_idx % frame_stride == 0:
-            if max_frames is not None and saved_idx >= max_frames:
-                break
-            frame_path = output_dir / f"frame_{saved_idx:06d}.jpg"
-            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            cv2.imwrite(str(frame_path), frame_rgb)
-            saved_idx += 1
-        frame_idx += 1
+            continue
+        frame_path = output_dir / f"frame_{saved_idx:06d}.jpg"
+        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        cv2.imwrite(str(frame_path), frame_rgb)
+        saved_idx += 1
     cap.release()
     return saved_idx
 
@@ -222,12 +242,22 @@ def visualize_trajectory_with_gt(trajectory, gt_trajectory_2d=None, output_path=
 def process_single_video(video_path, model, config, output_dir, segments_dir=None):
     segment_name = Path(video_path).stem
     frames_dir = Path(output_dir) / "frames" / segment_name
-    if not frames_dir.exists() or not any(frames_dir.glob("frame_*.jpg")):
+    desired_num_frames = config["model"].get("num_frames")
+    existing_frames = list(frames_dir.glob("frame_*.jpg")) if frames_dir.exists() else []
+    if desired_num_frames is not None:
+        needs_refresh = len(existing_frames) != int(desired_num_frames)
+    else:
+        needs_refresh = len(existing_frames) == 0
+
+    if needs_refresh:
+        if frames_dir.exists():
+            shutil.rmtree(frames_dir)
         extract_video_frames(
             video_path,
             frames_dir,
             frame_stride=config["model"].get("frame_stride", 1),
             max_frames=config["model"].get("max_frames"),
+            num_frames=desired_num_frames,
         )
 
     with torch.no_grad():

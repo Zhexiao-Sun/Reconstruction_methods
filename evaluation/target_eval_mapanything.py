@@ -182,6 +182,7 @@ def evaluate_world_models(
                         frame_dir,
                         frame_stride=map_cfg["model"].get("frame_stride", 1),
                         max_frames=map_cfg["model"].get("max_frames"),
+                        num_frames=map_cfg["model"].get("num_frames"),
                     )  # reuse cached frames if present
 
                 with torch.no_grad():
