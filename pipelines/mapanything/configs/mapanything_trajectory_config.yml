@@ -1,0 +1,28 @@
+paths:
+  videos_dir: "dataset/wm_videos/mapanything"
+  segments_dir: "dataset/Benchmark"
+  output_base_path: "pipelines/mapanything/output"
+
+model:
+  model_id: "facebook/map-anything"
+  memory_efficient_inference: false
+  use_amp: true
+  amp_dtype: "bf16"
+  apply_mask: true
+  mask_edges: true
+  apply_confidence_mask: false
+  confidence_percentile: 10
+  resize_mode: "fixed_mapping"
+  resolution_set: 518
+  frame_stride: 1
+  max_frames: null
+
+visualization:
+  save_plots: true
+  dpi: 300
+
+output:
+  save_npy: true
+  save_csv: true
+  save_json: true
+
