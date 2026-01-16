@@ -101,8 +101,8 @@ def extract_video_frames(
         if not ret:
             continue
         frame_path = output_dir / f"frame_{saved_idx:06d}.jpg"
-        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        cv2.imwrite(str(frame_path), frame_rgb)
+        # OpenCV imwrite expects BGR; keep the original channel order to avoid color shift.
+        cv2.imwrite(str(frame_path), frame)
         saved_idx += 1
     cap.release()
     return saved_idx

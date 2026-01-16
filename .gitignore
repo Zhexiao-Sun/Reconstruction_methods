@@ -24,7 +24,7 @@ dataset/wm_videos/*
 dataset/Benchmark/*
 video_frames
 
-evaluation_results/vggt/*
+evaluation_results/*
 
 # vggt code
 models/vggt/VGGT-1B
