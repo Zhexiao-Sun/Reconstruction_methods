@@ -1,0 +1,42 @@
+paths:
+  videos_dir: dataset/wm_videos/DynamicVerse
+  segments_dir: dataset/Benchmark
+  output_base_path: pipelines/dynamicverse/output
+  workdir: pipelines/dynamicverse/workdir
+  dynamicverse_root: models/DynamicVerse
+  dynamicba_config: models/DynamicVerse/dynamicBA/config/config_demo.yaml
+
+preprocess:
+  frame_stride: 1
+  max_frames: null
+  num_frames: 9
+  image_ext: jpg
+  unidepth:
+    use_v2: false
+    use_gt_K: false
+  cotracker:
+    interval: 10
+    grid_size: 50
+
+dynamicba:
+  experiment_name: base
+  suffix: "_dynamic_flow_fused"
+  opt_intrinsics: true
+  depth_dir: unidepth
+  cotracker_path: cotrackerv3_10_50
+  dyn_mask_dir: deva
+  mask_name: Annotations
+  max_frames: null
+
+axis_mapping:
+  order: ["x", "z", "y"]
+
+visualization:
+  save_plots: true
+  dpi: 300
+
+output:
+  save_npy: true
+  save_csv: true
+  save_json: true
+
