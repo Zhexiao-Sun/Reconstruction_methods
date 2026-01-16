@@ -1,0 +1,11 @@
+type: aria-everyday-activities-extracted
+data_path_training: "data/aria_everyday_activities"
+data_path_testing: "data/aria_everyday_activities"
+# split: "anycam/datasets/aria_everyday_activities/splits/eval_seqs_64"
+split: null
+image_size: 512
+frame_count: 2
+# dilation: 10
+dilation: 1
+return_depth: false
+return_flow: false

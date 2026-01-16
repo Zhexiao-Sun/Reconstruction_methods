@@ -1,0 +1,10 @@
+type: opendv
+data_path_training: "${data_root}/opendv/data"
+data_path_testing: "${data_root}/opendv/data"
+split: null
+image_size: 384
+frame_count: 2
+preprocessed_path_training: "${data_root}/opendv/flows_1"
+preprocessed_path_testing: "${data_root}/opendv/flows_1"
+return_depth: false
+return_flow: true

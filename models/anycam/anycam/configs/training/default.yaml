@@ -1,0 +1,10 @@
+defaults:
+  - optimizer: adam
+  - scheduler: step
+  - _self_
+
+num_epochs: 50
+continue: true
+
+checkpoint_every: 10000
+log_every_iters: 100

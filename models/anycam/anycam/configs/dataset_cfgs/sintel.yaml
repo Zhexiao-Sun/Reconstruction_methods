@@ -1,0 +1,10 @@
+type: sintel
+data_path_training: "data/Sintel/training"
+data_path_testing: "data/Sintel/training"
+split: null
+image_size: 384
+frame_count: 2
+# preprocessed_path_training: "data/unimatch_flows/sintel/training"
+# preprocessed_path_testing: "data/unimatch_flows/sintel/training"
+return_depth: false
+return_flow: false

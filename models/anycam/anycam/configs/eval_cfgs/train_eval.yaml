@@ -1,0 +1,50 @@
+with_rerun: false
+pyramid: [0]
+
+do_ba_refinement: false
+ba_refinement_level: 2
+
+
+prediction:
+  model_seq_len: 8
+  shift: 7
+
+  proj_strategy: "weighted"
+  proj_label_source: "prediction"
+
+
+ba_refinement:
+  ba_window: 8
+  overlap: 6
+  
+  rotation_representation: "quaternion"
+  lambda_depth: 0
+  lambda_pose: 0
+  lambda_smoothness: 200
+  lambda_depth_repr: 0
+
+  # global_every_n: 2
+  global_every_n: 100
+
+  n_steps_sliding: 400
+  n_steps_global: 100
+  n_steps_last_global: 5000
+
+  all_reg_to_zero: true
+
+  track_len: 8
+  stride: 1
+  grid_size: 16
+
+  optimize_relatives: false
+
+  lr: 0.0001
+
+  with_rerun: false
+  log_interval: 200
+  rerun_offset: 10
+
+
+dataset:
+  center_crop: false
+  image_size: [336, null]

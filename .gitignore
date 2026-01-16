@@ -31,3 +31,22 @@ models/vggt/VGGT-1B
 *.bsub
 
 evaluation_results
+
+# Hydra / ML outputs
+models/anycam/outputs/
+**/.hydra/
+
+# pretrained models and checkpoints
+models/anycam/pretrained_models/
+*.pt
+*.pth
+*.ckpt
+
+# TensorBoard
+events.out.tfevents*
+
+# General
+__pycache__/
+*.pyc
+.env
+.venv

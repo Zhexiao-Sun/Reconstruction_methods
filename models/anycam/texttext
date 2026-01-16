@@ -1,0 +1,22 @@
+apt-get update
+apt-get install -y libgl1 libglib2.0-0
+
+ssh -L 9090:localhost:9090 -L 9877:localhost:9877 -p 31920 root@ssh.hyper.ai
+
+
+rerun --serve-web
+http://localhost:9090/?url=ws://localhost:9877
+
+
+### 跑demo
+python anycam/scripts/anycam_demo.py ++input_path=/openbayes/home/Reconstruction_methods/dataset/wm_videos/anycam/sample_083_custom_segment_075_377.mp4 ++model_path=pretrained_models/anycam_seq8 ++visualize=true ++rerun_mode=connect
+
+### 跑pipline singelsegment 测试
+python pipelines/anycam/test_single_segment.py \
+  --segment_name sample_083_custom_segment_075_377 \
+  --config_path pipelines/anycam/configs/anycam_trajectory_config.yml
+  
+### 与GT对比
+python evaluation/target_eval_anycam.py -n 3 \
+  --pipeline_config_path pipelines/anycam/configs/anycam_trajectory_config.yml \
+  --wm_videos_dir dataset/wm_videos

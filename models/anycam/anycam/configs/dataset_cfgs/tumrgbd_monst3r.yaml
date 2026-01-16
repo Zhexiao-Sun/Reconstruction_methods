@@ -1,0 +1,9 @@
+type: tumrgbd
+data_path_training: "data/TUM_RGBD"
+data_path_testing: "data/TUM_RGBD"
+split: "anycam/datasets/tum_rgbd/splits/monst3r"
+image_size: 384
+frame_count: 2
+dilation: 10
+return_depth: false
+return_flow: false

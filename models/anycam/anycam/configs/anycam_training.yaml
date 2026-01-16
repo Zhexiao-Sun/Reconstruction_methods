@@ -1,0 +1,159 @@
+data_root: "${oc.env:ANYCAM_DATA, data}"
+
+defaults:
+  - training: default
+  - dataset_cfgs/sintel@dataset_cfgs.sintel
+  - dataset_cfgs/sintel_gt@dataset_cfgs.sintel_gt
+  - dataset_cfgs/waymo@dataset_cfgs.waymo
+  - dataset_cfgs/re10k_eval_seqs_clean@dataset_cfgs.re10k_eval_seqs_clean
+  - dataset_cfgs/tumrgbd_eval_seqs@dataset_cfgs.tumrgbd_eval_seqs
+  - dataset_cfgs/tumrgbd_eval_seqs_64@dataset_cfgs.tumrgbd_eval_seqs_64
+  - dataset_cfgs/waymo_eval_seqs_2_64@dataset_cfgs.waymo_eval_seqs_2_64
+  - dataset_cfgs/re10k@dataset_cfgs.re10k
+  - dataset_cfgs/youtube_vos@dataset_cfgs.youtube_vos
+  - dataset_cfgs/opendv@dataset_cfgs.opendv
+  - dataset_cfgs/walkingtours@dataset_cfgs.walkingtours
+  - dataset_cfgs/epickitchens@dataset_cfgs.epickitchens
+
+
+training_type: "anycam_training"
+seed: 0
+backend: null
+nproc_per_node: null
+with_amp: true
+name: "training_8"
+batch_size: 8
+num_workers: 8
+
+
+dataset:
+  - re10k
+  - youtube_vos
+  - opendv
+  - walkingtours
+  - epickitchens
+
+
+val_dataset:
+  - re10k_eval_seqs_clean
+
+dataset_params:
+  frame_count: 2
+  return_flow: true
+  image_size: 336
+
+
+dataloading:
+  epoch_length: 80000
+  staged_datasets:
+    re10k: 1
+    walkingtours: 2
+    youtube_vos: 3
+    epickitchens: 4
+    opendv: 5
+
+
+output:
+  path: "out/anycam_training"
+  unique_id: debug
+
+
+training:
+  checkpoint_every: 2500
+  n_saved: 4
+
+  stop_iteration: 250000
+
+  num_epochs: 1000
+  optimizer: 
+    args:
+      lr: 1e-4  
+
+  scheduler:
+    step_size: 100000
+
+
+loss:
+  - type: "pose_loss"
+    lambda_dist: 0
+    pose_token_weight_decay: 0.01
+    lambda_fwd_bwd_consistency: 1
+
+model:
+  depth_predictor:
+    type: "unidepth"
+    
+  pose_predictor:
+    type: "anycam"
+    focal_parameterization: linlog-candidates
+    focal_min: 0.2
+    focal_max: 7
+
+    rotation_parameterization: "axis-angle"
+
+    separate_pose_candidates: true
+    separate_uncertainty_candidates: true
+
+    pose_token_partial_dropout: 0.0
+
+  depth_aligner: 
+    type: identity
+
+  flow_model: 'unimatch'
+  use_provided_flow: true
+  use_provided_proj: false
+
+  train_directions: both
+
+  perform_subsampled_pose_pass: false
+  subsampling_drop_n: 1
+
+  single_focal_warmup_iters: 0
+
+  z_near: 0.1
+  z_far: 100
+
+validation:
+  validation:
+    batch_size: 1
+
+    subset:
+      type: range
+      args:
+        start: 0
+        end: 512
+    custom_validator: anycam.video_validator.video_validator
+    fit_video_config: anycam/configs/eval_cfgs/train_eval_2.yaml
+    log_loss: false
+    global_step:
+      type: "trainer iteration" 
+    events:
+      - type: ITERATION_COMPLETED
+        args:
+          every: 5000
+      - type: COMPLETED
+        args: null
+
+
+  visualization:
+    metrics: []
+    subset:
+      type: range
+      args:
+        start: 0
+        end: 1
+    visualize:
+      input_imgs: null
+      depth: null
+      rendered_flow: null
+      gt_flow: null
+      uncertainty: null
+    log_loss: false
+    global_step:
+      type: "trainer iteration"
+    events:
+      - type: ITERATION_COMPLETED
+        args:
+          every: 2500
+      - type: COMPLETED
+        args: null

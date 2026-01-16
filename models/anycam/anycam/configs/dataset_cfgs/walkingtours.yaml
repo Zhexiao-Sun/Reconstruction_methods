@@ -1,0 +1,10 @@
+type: walkingtours
+data_path_training: "${data_root}/walkingtours/data"
+data_path_testing: "${data_root}/walkingtours/data"
+split: null
+image_size: 384
+frame_count: 2
+preprocessed_path_training: "${data_root}/walkingtours/flows_1"
+preprocessed_path_testing: "${data_root}/walkingtours/flows_1"
+return_depth: false
+return_flow: true

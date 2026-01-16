@@ -1,0 +1,18 @@
+data_root: "${oc.env:ANYCAM_DATA, data}"
+
+defaults:
+  - eval_cfgs/fit_video@fit_video
+
+model_path: null  # Path to the model
+other_model: anycam  # Path to another model
+dataset: "anycam/configs/dataset_cfgs/sintel_particlesfm.yaml"  # Dataset path
+out_path: "results/eval_trajectories"  # Output path
+split_path: null  # Path to the dataset split
+
+image_size: -1  # Image size for square crops
+
+with_rerun: false  # Perform rerun
+rerun_log:  # Logs for rerun
+  - pose
+  - img
+save_rerun: false  # Save rerun results

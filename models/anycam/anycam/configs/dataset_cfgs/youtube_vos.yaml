@@ -1,0 +1,10 @@
+type: youtubevos
+data_path_training: "${data_root}/youtubevos/data/train"
+data_path_testing: "${data_root}/youtubevos/data/valid"
+split: null
+image_size: 384
+frame_count: 2
+preprocessed_path_training: "${data_root}/youtubevos/flows_1/train"
+preprocessed_path_testing: "${data_root}/youtubevos/flows_1/valid"
+return_depth: false
+return_flow: false

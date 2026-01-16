@@ -1,0 +1,12 @@
+type: re10k
+data_path_training: "${data_root}/re10k/data/test.pickle"
+data_path_testing: "${data_root}/re10k/data/test.pickle"
+# split: "anycam/datasets/realestate10k/splits/720"
+split: null
+image_size: 384
+frame_count: 2
+dilation: 1
+preprocessed_path_training: "${data_root}/re10k/flows_1"
+preprocessed_path_testing: "${data_root}/re10k/flows_1"
+return_depth: false
+return_flow: true  
