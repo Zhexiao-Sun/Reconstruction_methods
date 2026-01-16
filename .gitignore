@@ -30,8 +30,6 @@ models/vggt/VGGT-1B
 # lsf
 *.bsub
 
-evaluation_results
-
 # Hydra / ML outputs
 models/anycam/outputs/
 **/.hydra/
