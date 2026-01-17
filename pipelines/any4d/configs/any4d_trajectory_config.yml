@@ -6,7 +6,7 @@ paths:
 
 model:
   config_path: "models/Any4D/configs/train.yaml"
-  checkpoint_path: "models/Any4D/checkpoints/any4d_4v_combined.pth"
+  checkpoint_path: "models/Any4D/checkpoints/Any4D_Checkpoint/any4d_4v_combined.pth"
   config_overrides:
     - "machine=local"
     - "model=any4d"

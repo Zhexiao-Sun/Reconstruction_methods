@@ -93,7 +93,7 @@ def setup_model(model_cfg, device):
     model = init_model(cfg.model.model_str, cfg.model.model_config)
     checkpoint_path = _resolve_path(model_cfg.get("checkpoint_path"))
     if checkpoint_path:
-        ckpt = torch.load(checkpoint_path, map_location="cpu")
+        ckpt = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
         state_dict = ckpt["model"] if isinstance(ckpt, dict) and "model" in ckpt else ckpt
         model.load_state_dict(state_dict, strict=False)
     model.to(device)
