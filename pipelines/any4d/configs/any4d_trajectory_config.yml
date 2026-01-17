@@ -1,0 +1,43 @@
+paths:
+  videos_dir: "dataset/wm_videos/Any4D"
+  segments_dir: "dataset/Benchmark"
+  output_base_path: "pipelines/any4d/output"
+  any4d_root: "models/Any4D"
+
+model:
+  config_path: "models/Any4D/configs/train.yaml"
+  checkpoint_path: "models/Any4D/checkpoints/any4d_4v_combined.pth"
+  config_overrides:
+    - "machine=local"
+    - "model=any4d"
+    - "model.encoder.uses_torch_hub=false"
+    - "model/task=images_only"
+  data_norm_type: "dinov2"
+  resize_mode: "fixed_mapping"
+  resolution_set: 518
+  fixed_size: [518, 336]
+  patch_size: 14
+  use_amp: true
+  amp_dtype: "bf16"
+  apply_mask: false
+  mask_edges: false
+  apply_confidence_mask: false
+  confidence_percentile: 10
+  compute_moge_mask: false
+  binary_mask_path: null
+  num_frames: null
+  frame_stride: 1
+  max_frames: null
+
+axis_mapping:
+  order: ["x", "z", "y"]
+
+visualization:
+  save_plots: true
+  dpi: 300
+
+output:
+  save_npy: true
+  save_csv: true
+  save_json: true
+
