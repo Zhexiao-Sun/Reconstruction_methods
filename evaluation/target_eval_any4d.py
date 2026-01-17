@@ -177,13 +177,28 @@ def evaluate_world_models(
 
             try:
                 frame_dir = os.path.join(output_dir, "video_frames", segment_name)
-                if not os.path.exists(frame_dir) or not glob.glob(os.path.join(frame_dir, "frame_*.jpg")):
+                desired_num_frames = any4d_cfg["model"].get("num_frames")
+                existing_frames = (
+                    glob.glob(os.path.join(frame_dir, "frame_*.jpg")) if os.path.exists(frame_dir) else []
+                )
+                needs_refresh = False
+                if desired_num_frames is not None:
+                    # 帧采样策略变更时，强制重抽，避免旧缓存导致误用全帧
+                    needs_refresh = len(existing_frames) != int(desired_num_frames)
+                else:
+                    needs_refresh = len(existing_frames) == 0
+
+                if needs_refresh:
+                    if os.path.exists(frame_dir):
+                        import shutil
+
+                        shutil.rmtree(frame_dir)
                     extract_video_frames(
                         wm_video_path,
                         frame_dir,
                         frame_stride=any4d_cfg["model"].get("frame_stride", 1),
                         max_frames=any4d_cfg["model"].get("max_frames"),
-                        num_frames=any4d_cfg["model"].get("num_frames"),
+                        num_frames=desired_num_frames,
                     )
 
                 outputs = run_any4d_inference(frame_dir, model, any4d_cfg["model"], device)

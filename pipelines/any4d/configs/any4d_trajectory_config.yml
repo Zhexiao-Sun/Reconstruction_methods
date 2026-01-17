@@ -25,7 +25,7 @@ model:
   confidence_percentile: 10
   compute_moge_mask: false
   binary_mask_path: null
-  num_frames: null
+  num_frames: 9
   frame_stride: 1
   max_frames: null
 

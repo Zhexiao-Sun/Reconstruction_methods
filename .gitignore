@@ -38,9 +38,11 @@ models/anycam/outputs/
 
 # pretrained models and checkpoints
 models/anycam/pretrained_models/
+models/DynamicVerse/preprocess/pretrained/
 *.pt
 *.pth
 *.ckpt
+*.safetensors
 
 # TensorBoard
 events.out.tfevents*
