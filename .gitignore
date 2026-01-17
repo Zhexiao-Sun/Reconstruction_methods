@@ -52,3 +52,8 @@ __pycache__/
 *.pyc
 .env
 .venv
+
+models/DynamicVerse/UniDepth/unidepth/layers/nystrom_attention.py
+models/DynamicVerse/UniDepth/build/
+models/DynamicVerse/UniDepth/unidepth/layers/nystrom.py
+models/DynamicVerse/preprocess/pretrained.zip
