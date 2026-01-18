@@ -18,8 +18,7 @@ import yaml
 FILE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(FILE_DIR, "../../.."))
 
-_UNIDEPTH_READY = False
-_COTRACKER_READY = False
+# 注意：不要在多视频评测中用全局“已完成”标志缓存预处理结果；否则只会对第一个视频生效，后续视频会被错误跳过。  # noqa: E501
 
 
 def _resolve_path(path_value):
@@ -161,9 +160,6 @@ def _list_scene_dirs(workdir):
 
 
 def _ensure_unidepth(workdir, dynamicverse_root, preprocess_cfg):
-    global _UNIDEPTH_READY
-    if _UNIDEPTH_READY:
-        return
     unidepth_cfg = preprocess_cfg.get("unidepth", {})
     output_dir_name = _derive_unidepth_dir_name(unidepth_cfg)
     missing_depth = False
@@ -173,7 +169,6 @@ def _ensure_unidepth(workdir, dynamicverse_root, preprocess_cfg):
             missing_depth = True
             break
     if not missing_depth:
-        _UNIDEPTH_READY = True
         return
     script_path = os.path.join(dynamicverse_root, "preprocess", "run_unidepth.py")
     cmd = [sys.executable, script_path, "--workdir", workdir]
@@ -182,13 +177,9 @@ def _ensure_unidepth(workdir, dynamicverse_root, preprocess_cfg):
     if unidepth_cfg.get("use_gt_K"):
         cmd.append("--use_gt_K")
     subprocess.run(cmd, check=True, cwd=dynamicverse_root, env=_build_env(dynamicverse_root))
-    _UNIDEPTH_READY = True
 
 
 def _ensure_cotracker(workdir, dynamicverse_root, preprocess_cfg):
-    global _COTRACKER_READY
-    if _COTRACKER_READY:
-        return
     cotracker_cfg = preprocess_cfg.get("cotracker", {})
     output_dir_name = _derive_cotracker_dir_name(cotracker_cfg)
     missing_tracks = False
@@ -198,7 +189,6 @@ def _ensure_cotracker(workdir, dynamicverse_root, preprocess_cfg):
             missing_tracks = True
             break
     if not missing_tracks:
-        _COTRACKER_READY = True
         return
     script_path = os.path.join(dynamicverse_root, "preprocess", "run_cotracker.py")
     cmd = [
@@ -212,7 +202,6 @@ def _ensure_cotracker(workdir, dynamicverse_root, preprocess_cfg):
         str(cotracker_cfg.get("grid_size", 50)),
     ]
     subprocess.run(cmd, check=True, cwd=dynamicverse_root, env=_build_env(dynamicverse_root))
-    _COTRACKER_READY = True
 
 
 def _find_pose_file(output_dir, suffix):

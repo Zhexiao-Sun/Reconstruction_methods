@@ -15,7 +15,7 @@ preprocess:
     use_v2: false
     use_gt_K: false
   cotracker:
-    interval: 10
+    interval: 1
     grid_size: 50
 
 dynamicba:
@@ -23,7 +23,7 @@ dynamicba:
   suffix: "_dynamic_flow_fused"
   opt_intrinsics: true
   depth_dir: unidepth
-  cotracker_path: cotrackerv3_10_50
+  cotracker_path: cotrackerv3_1_50
   dyn_mask_dir: deva
   mask_name: Annotations
   max_frames: null

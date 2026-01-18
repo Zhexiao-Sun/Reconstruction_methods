@@ -245,9 +245,15 @@ class Engine():
             filtered_points: (M, 3) tensor with isolated points removed
             mask: boolean mask indicating which points were kept
         """
+        if points is None or points.numel() == 0:  # 关键：空点集时直接返回“不过滤任何点”，避免 quantile() 空输入崩溃
+            return torch.zeros((0,), dtype=torch.bool, device=self.device)
+
         # Add batch dimension if needed
         if len(points.shape) == 2:
             points = points.unsqueeze(0)  # (1, N, 3)
+
+        if points.shape[1] == 0 or points.shape[1] <= (k + 1):  # 关键：点数太少无法做 KNN/统计分位数，直接不过滤
+            return torch.zeros((points.shape[1],), dtype=torch.bool, device=points.device)
         
         # Compute k nearest neighbors
         # knn_points returns (dists, idx) where dists is (B, P1, K) tensor of squared distances
@@ -263,6 +269,8 @@ class Engine():
         
         # Calculate average distance to k nearest neighbors
         avg_distances = torch.mean(neighbor_distances, dim=1)  # (N,)
+        if avg_distances.numel() == 0:  # 关键：避免 quantile() 空输入
+            return torch.zeros((0,), dtype=torch.bool, device=points.device)
         
         # Calculate threshold based on percentile
         threshold = torch.quantile(avg_distances, percentile/100)
@@ -276,6 +284,8 @@ class Engine():
 
 
         points_3d_world = self.controlpoints_static()                                  # N x 3
+        if points_3d_world is None or points_3d_world.numel() == 0:  # 关键：静态点为空时直接跳过过滤
+            return
         mask = self.filter_isolated_points(points_3d_world)
 
         self.all_vis_static[:, mask] = False
@@ -705,7 +715,10 @@ class Engine():
         
 
         scene_points = self.controlpoints_static()
-        self.scene_scale = torch.mean(torch.quantile(scene_points, 0.9, dim=0) - torch.quantile(scene_points, 0.1, dim=0))
+        if scene_points is None or scene_points.numel() == 0:  # 关键：静态点为空时给一个默认 scene_scale，避免 quantile() 空输入崩溃
+            self.scene_scale = torch.tensor(1.0, device=self.device)
+        else:
+            self.scene_scale = torch.mean(torch.quantile(scene_points, 0.9, dim=0) - torch.quantile(scene_points, 0.1, dim=0))
 
         logging.info(f"Starting depth interpolation processing for all {self.num_frames} frames...")
         processed_static_regions = 0
@@ -1527,11 +1540,12 @@ class Engine():
         self.all_labels = self.all_labels.to(self.device)
         self.confidences = self.confidences.to(self.device)
 
-        self.all_tracks_static = self.all_tracks[:, self.all_labels==0, :]
-        self.all_vis_static = self.all_vis[:, self.all_labels==0]
-        self.all_tracks_static_init = self.track_init_frames[self.all_labels==0]
-        self.track_init_frames_static = self.track_init_frames[self.all_labels==0] # This might be redundant with all_tracks_static_init
-        self.static_confidences = self.confidences[:, self.all_labels==0]
+        static_mask = (self.all_labels == 0) | (self.all_labels == 2)  # 关键：把 short static(2) 也当静态，否则可能静态点=0 导致后续 quantile 崩溃
+        self.all_tracks_static = self.all_tracks[:, static_mask, :]
+        self.all_vis_static = self.all_vis[:, static_mask]
+        self.all_tracks_static_init = self.track_init_frames[static_mask]
+        self.track_init_frames_static = self.track_init_frames[static_mask]  # 兼容旧字段，和 all_tracks_static_init 等价
+        self.static_confidences = self.confidences[:, static_mask]
 
         # Ensure we're ONLY using DeVA dynamic points (label==1)
         # Explicitly NOT using any EPI dynamic points (which would be in label==3)
@@ -2757,6 +2771,8 @@ class Engine():
             outliers = torch.concat((outlier_score , outlier_score [:,-1:]), dim=-1)
             points_energy = torch.max(outliers, dim=1)[0]
 
+            if points_energy.numel() == 0:  # 关键：避免 quantile() 空输入崩溃（极端情况下动态点被过滤到空）
+                return
             thrs = torch.quantile(points_energy, 0.98) + 1.0
             outliers = points_energy > thrs
             self.outliers_dyn = outliers
@@ -5645,7 +5661,7 @@ class Engine():
         logging.info(f"all_vis_static shape: {self.all_vis_static.shape}")
         
         # Get all co-tracker points marked as static
-        static_point_mask = (self.all_labels == 0)
+        static_point_mask = (self.all_labels == 0) | (self.all_labels == 2)  # 关键：init 阶段同样把 short static 纳入静态候选
         logging.info(f"Static point mask sum: {static_point_mask.sum().item()}")
         
         if static_point_mask.sum() == 0:
