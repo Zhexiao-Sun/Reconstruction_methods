@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+python run_inference_four_segments_epoch-49_batch_cli.py --no-cpu-offload --cfg-merge --no-vae-tiling --num-inference-steps 30
+"""
+import argparse
 import csv
 import re
 from pathlib import Path
@@ -37,6 +41,35 @@ SEED = 1
 NEGATIVE_PROMPT = DEFAULT_NEGATIVE_PROMPT
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Wan2.2 TI2V LoRA inference with runtime toggles.")
+    parser.add_argument(
+        "--cpu-offload",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Enable CPU offload and VRAM management (default: enabled).",
+    )
+    parser.add_argument(
+        "--cfg-merge",
+        action=argparse.BooleanOptionalAction,
+        default=False,
+        help="Enable merged CFG (default: disabled).",
+    )
+    parser.add_argument(
+        "--vae-tiling",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Enable VAE tiling (default: enabled).",
+    )
+    parser.add_argument(
+        "--num-inference-steps",
+        type=int,
+        default=50,
+        help="Number of denoising steps (default: 50).",
+    )
+    return parser.parse_args()
+
+
 def sanitize(name: str) -> str:
     """Return a filesystem-safe tag derived from the LoRA filename."""
     return re.sub(r"[^A-Za-z0-9._-]+", "_", name)
@@ -53,14 +86,15 @@ def infer_output_dir(explicit: Path | None, lora_path: Path | None, num_frames: 
     return base / f"wan2.2-ti2v-5b_inference_base_{num_frames}_frames"
 
 
-def build_pipeline(lora_path: Path | None, lora_alpha: float):
+def build_pipeline(lora_path: Path | None, lora_alpha: float, cpu_offload: bool):
+    offload_device = "cpu" if cpu_offload else None
     pipe = WanVideoPipeline.from_pretrained(
         torch_dtype=torch.bfloat16,
         device="cuda",
         model_configs=[
-            ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B", origin_file_pattern="models_t5_umt5-xxl-enc-bf16.pth", offload_device="cpu"),
-            ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B", origin_file_pattern="diffusion_pytorch_model*.safetensors", offload_device="cpu"),
-            ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B", origin_file_pattern="Wan2.2_VAE.pth", offload_device="cpu"),
+            ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B", origin_file_pattern="models_t5_umt5-xxl-enc-bf16.pth", offload_device=offload_device),
+            ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B", origin_file_pattern="diffusion_pytorch_model*.safetensors", offload_device=offload_device),
+            ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B", origin_file_pattern="Wan2.2_VAE.pth", offload_device=offload_device),
         ],
     )
     if lora_path:
@@ -68,16 +102,18 @@ def build_pipeline(lora_path: Path | None, lora_alpha: float):
         print(f"[info] LoRA loaded: {lora_path} (alpha={lora_alpha})")
     else:
         print("[info] No LoRA path provided; using base model only.")
-    pipe.enable_vram_management()
+    if cpu_offload:
+        pipe.enable_vram_management()
     return pipe
 
 
 def main():
+    args = parse_args()
     output_dir = infer_output_dir(OUTPUT_DIR, LORA_PATH, NUM_FRAMES)
     output_dir.mkdir(parents=True, exist_ok=True)
     print(f"[info] Saving outputs to: {output_dir}")
 
-    pipe = build_pipeline(LORA_PATH, LORA_ALPHA)
+    pipe = build_pipeline(LORA_PATH, LORA_ALPHA, cpu_offload=args.cpu_offload)
 
     with METADATA_PATH.open("r", encoding="utf-8") as f:
         entries = list(csv.DictReader(f))
@@ -100,7 +136,9 @@ def main():
             width=WIDTH,
             num_frames=NUM_FRAMES,
             seed=seed,
-            tiled=True,
+            tiled=args.vae_tiling,
+            cfg_merge=args.cfg_merge,
+            num_inference_steps=args.num_inference_steps,  # 运行时可调（例如 30）以测试速度/质量
         )
         save_video(video, str(output_path), fps=FPS, quality=QUALITY)
 

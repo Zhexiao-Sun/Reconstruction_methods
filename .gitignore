@@ -20,6 +20,7 @@
 exp
 
 # data
+DiffSynth-Studio/dataset/*
 dataset/wm_videos/*
 dataset/Benchmark/*
 video_frames
@@ -57,3 +58,6 @@ models/DynamicVerse/UniDepth/unidepth/layers/nystrom_attention.py
 models/DynamicVerse/UniDepth/build/
 models/DynamicVerse/UniDepth/unidepth/layers/nystrom.py
 models/DynamicVerse/preprocess/pretrained.zip
+
+DiffSynth-Studio/models/Wan-AI
+DiffSynth-Studio/outputs
