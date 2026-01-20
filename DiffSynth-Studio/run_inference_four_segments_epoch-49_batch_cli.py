@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-python run_inference_four_segments_epoch-49_batch_cli.py --no-cpu-offload --cfg-merge --no-vae-tiling --num-inference-steps 30
+python run_inference_four_segments_epoch-49_batch_cli.py --no-cpu-offload --cfg-merge --no-vae-tiling
 """
 import argparse
 import csv
