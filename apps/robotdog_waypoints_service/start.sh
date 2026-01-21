@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+conda activate /openbayes/home/mapanything
+
 APP_DIR="${APP_DIR:-/openbayes/home/Reconstruction_methods}"
 HOST="${HOST:-0.0.0.0}"
 PORT="${PORT:-8000}"
