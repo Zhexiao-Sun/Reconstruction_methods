@@ -7,11 +7,13 @@ RobotDog Waypoints 单体同步服务（FastAPI）。
 from __future__ import annotations
 
 import json
+import re
 import time
 from pathlib import Path
 from threading import Lock
 
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
 
 from .schemas import InferWaypointsRequest, InferWaypointsResponse
 from .service_config import ServiceConfig
@@ -39,6 +41,32 @@ def _startup() -> None:
 @app.get("/healthz")
 def healthz() -> dict:
     return {"ok": True}
+
+
+def _validate_request_id(request_id: str) -> None:
+    # 约束 request_id 格式，避免 path traversal 等安全问题。  # 关键安全
+    if not re.fullmatch(r"[0-9]{8}_[0-9]{6}_[0-9a-f]{8}", request_id):
+        raise HTTPException(status_code=400, detail="Invalid request_id")
+
+
+@app.get("/requests/{request_id}/result.json")
+def get_result_json(request_id: str):
+    _validate_request_id(request_id)
+    req_dir = Path("/openbayes/home/Reconstruction_methods/runtime/requests") / request_id
+    result_path = req_dir / "result.json"
+    if not result_path.exists():
+        raise HTTPException(status_code=404, detail="result.json not found")
+    return FileResponse(str(result_path), media_type="application/json")
+
+
+@app.get("/requests/{request_id}/wan_output.mp4")
+def download_wan_output_mp4(request_id: str):
+    _validate_request_id(request_id)
+    req_dir = Path("/openbayes/home/Reconstruction_methods/runtime/requests") / request_id
+    video_path = req_dir / "wan_output.mp4"
+    if not video_path.exists():
+        raise HTTPException(status_code=404, detail="wan_output.mp4 not found")
+    return FileResponse(str(video_path), media_type="video/mp4", filename=f"{request_id}.mp4")
 
 
 @app.post("/infer_waypoints", response_model=InferWaypointsResponse)

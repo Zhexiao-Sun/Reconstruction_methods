@@ -57,6 +57,10 @@ class ServiceConfig:
     wan_cfg_merge: bool = _env_bool("WAN_CFG_MERGE", True)  # 与你常用启动参数 --cfg-merge 对齐
     wan_vae_tiling: bool = _env_bool("WAN_VAE_TILING", False)  # 与你常用启动参数 --no-vae-tiling 对齐
 
+    # Wan 权重根目录（含 Wan-AI/Wan2.1* 与 Wan-AI/Wan2.2*）  # 关键：迁移到 /openbayes/input/input0
+    # 注意：这里是 DiffSynth-Studio 的 models 目录（上一级），内部会拼出 /Wan-AI/<model_id>/...  # 避免路径写死到某个模型
+    wan_models_dir: Path = Path(os.getenv("WAN_MODELS_DIR", "/openbayes/input/input0/DiffSynth-Studio/models"))
+
     wan_model_id: str = os.getenv("WAN_MODEL_ID", "Wan-AI/Wan2.2-TI2V-5B")
     wan_lora_path: Path = Path(
         os.getenv(

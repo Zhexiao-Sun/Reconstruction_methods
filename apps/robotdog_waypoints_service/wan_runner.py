@@ -34,7 +34,7 @@ class WanRunner:
         if getattr(cfg, "offline_mode", False):
             os.environ.setdefault("MODELSCOPE_OFFLINE", "1")  # 禁止 modelscope 联网  # 关键：保证纯本地加载
 
-        local_model_path = str(cfg.reconstruction_root / "DiffSynth-Studio" / "models")  # 使用绝对路径，避免 cwd 影响  # 关键稳定性
+        local_model_path = str(getattr(cfg, "wan_models_dir", cfg.reconstruction_root / "DiffSynth-Studio" / "models"))  # 关键：支持把 Wan 权重放到 /openbayes/input/input0
 
         # 关键修复：WanVideoPipeline.from_pretrained 默认会下载 tokenizer_config（Wan2.1-T2V-1.3B 的 google/*），
         # 会导致在离线/网络差环境下额外耗时甚至失败。这里强制只用本地已有 tokenizer 资源。  # 关键：避免重复下载
@@ -73,6 +73,7 @@ class WanRunner:
                 ),
             ],
             tokenizer_config=tokenizer_config,
+            redirect_common_files=True,  # 关键：允许把通用权重（如 T5 encoder）重定向到 Wan2.1 目录，避免因复制不全导致 path=[] 崩溃
         )
 
         if cfg.wan_lora_path and Path(cfg.wan_lora_path).exists():
