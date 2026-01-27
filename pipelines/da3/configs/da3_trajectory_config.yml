@@ -1,0 +1,29 @@
+paths:
+  videos_dir: "dataset/wm_videos/DA3"
+  segments_dir: "dataset/Benchmark"
+  output_base_path: "pipelines/da3/output"
+
+model:
+  model_id: "depth-anything/DA3NESTED-GIANT-LARGE-1.1"
+  process_res: 504
+  process_res_method: "upper_bound_resize"
+  ref_view_strategy: "first"
+  use_ray_pose: false
+  align_to_input_ext_scale: true
+  num_frames: 9
+  frame_stride: null
+  max_frames: null
+  apply_scale_factor: true
+
+axis_mapping:
+  order: ["x", "z", "y"]
+
+visualization:
+  save_plots: true
+  dpi: 300
+
+output:
+  save_npy: true
+  save_csv: true
+  save_json: true
+
