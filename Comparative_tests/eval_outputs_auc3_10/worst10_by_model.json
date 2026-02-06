@@ -1,0 +1,1338 @@
+{
+  "generated_at": "2026-02-05T21:41:06",
+  "eval_dir": "/home/zhexiao/MA/2.Versuch/Reconstruction_methods/Comparative_tests/eval_outputs_auc3_10",
+  "topk": 10,
+  "definition": "worst = highest ate_rmse",
+  "models": {
+    "Any4D": {
+      "worst_up_to_scale": [
+        {
+          "segment": "sample_156_custom_segment_095_396",
+          "up_to_scale": {
+            "ate_rmse": 0.1975205802225735,
+            "rta_mean_deg": 4.8666548162756476,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 2.2279286937970513,
+            "rta_mean_deg": 4.866654816275648,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_532_custom_segment_134_384",
+          "up_to_scale": {
+            "ate_rmse": 0.19094803918410466,
+            "rta_mean_deg": 2.944449332778658,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 3.7606195604012016,
+            "rta_mean_deg": 2.9444493327786647,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_149_custom_segment_119_420",
+          "up_to_scale": {
+            "ate_rmse": 0.16871397360957682,
+            "rta_mean_deg": 3.8982596675348464,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.6825358892214861,
+            "rta_mean_deg": 3.8118646410142825,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_467_custom_segment_087_337",
+          "up_to_scale": {
+            "ate_rmse": 0.14681078661368313,
+            "rta_mean_deg": 4.518960046334631,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.238528159667069,
+            "rta_mean_deg": 4.904215293642176,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_182_custom_segment_007_307",
+          "up_to_scale": {
+            "ate_rmse": 0.1442796797996888,
+            "rta_mean_deg": 5.721240839970531,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.452936390440618,
+            "rta_mean_deg": 5.4710865377310505,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_155_custom_segment_118_419",
+          "up_to_scale": {
+            "ate_rmse": 0.1347277199010621,
+            "rta_mean_deg": 1.2117606746813394,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 2.508031071917115,
+            "rta_mean_deg": 1.9508278607189788,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_150_custom_segment_057_357",
+          "up_to_scale": {
+            "ate_rmse": 0.13421879054370273,
+            "rta_mean_deg": 2.028358356482367,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 2.2804551921509613,
+            "rta_mean_deg": 2.2330449627098883,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_235_custom_segment_099_399",
+          "up_to_scale": {
+            "ate_rmse": 0.1224250312360822,
+            "rta_mean_deg": 4.228559357725416,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 2.0238277090798515,
+            "rta_mean_deg": 5.253324778014378,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_556_custom_segment_021_271",
+          "up_to_scale": {
+            "ate_rmse": 0.11323152692743146,
+            "rta_mean_deg": 5.076779309804971,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 2.7656326519551815,
+            "rta_mean_deg": 5.845055576582544,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_548_custom_segment_362_612",
+          "up_to_scale": {
+            "ate_rmse": 0.11025630855815295,
+            "rta_mean_deg": 2.208396301080211,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 2.390867195446108,
+            "rta_mean_deg": 2.1377909616465147,
+            "num_heading": 8
+          }
+        }
+      ],
+      "worst_metric": [
+        {
+          "segment": "sample_447_custom_segment_058_308",
+          "up_to_scale": {
+            "ate_rmse": 0.03715651676356502,
+            "rta_mean_deg": 2.2127697209409583,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 5.07536945980722,
+            "rta_mean_deg": 2.2580328704119204,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_272_custom_segment_043_343",
+          "up_to_scale": {
+            "ate_rmse": 0.07541392056216549,
+            "rta_mean_deg": 4.202685045622127,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 4.340023538485069,
+            "rta_mean_deg": 5.6806733620621435,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_503_custom_segment_450_700",
+          "up_to_scale": {
+            "ate_rmse": 0.08215135106213466,
+            "rta_mean_deg": 2.4626966509522203,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 4.330614238205711,
+            "rta_mean_deg": 3.3782664986114046,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_439_custom_segment_187_437",
+          "up_to_scale": {
+            "ate_rmse": 0.04171933918413511,
+            "rta_mean_deg": 2.005812305489587,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 4.200066302772807,
+            "rta_mean_deg": 2.2530172042883017,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_218_custom_segment_029_329",
+          "up_to_scale": {
+            "ate_rmse": 0.05359857479440389,
+            "rta_mean_deg": 1.0969834752973233,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 3.9288247731894677,
+            "rta_mean_deg": 3.8225230405395463,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_300_custom_segment_161_411",
+          "up_to_scale": {
+            "ate_rmse": 0.02305256095275375,
+            "rta_mean_deg": 1.4947886197517477,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 3.8279905779127996,
+            "rta_mean_deg": 1.398349471572828,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_351_custom_segment_152_402",
+          "up_to_scale": {
+            "ate_rmse": 0.020184871519699596,
+            "rta_mean_deg": 1.821765644310914,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 3.8136620685342657,
+            "rta_mean_deg": 2.441742036001366,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_310_custom_segment_152_402",
+          "up_to_scale": {
+            "ate_rmse": 0.08188841165534409,
+            "rta_mean_deg": 2.1802426526826286,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 3.789284461129819,
+            "rta_mean_deg": 2.2611323941455765,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_200_custom_segment_087_387",
+          "up_to_scale": {
+            "ate_rmse": 0.07113348382793012,
+            "rta_mean_deg": 2.6296298712008164,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 3.7780311932788497,
+            "rta_mean_deg": 2.8940660749954037,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_532_custom_segment_134_384",
+          "up_to_scale": {
+            "ate_rmse": 0.19094803918410466,
+            "rta_mean_deg": 2.944449332778658,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 3.7606195604012016,
+            "rta_mean_deg": 2.9444493327786647,
+            "num_heading": 8
+          }
+        }
+      ]
+    },
+    "DA3": {
+      "worst_up_to_scale": [
+        {
+          "segment": "sample_302_custom_segment_091_341",
+          "up_to_scale": {
+            "ate_rmse": 0.07159689164487537,
+            "rta_mean_deg": 3.810640105451873,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.20460387030530527,
+            "rta_mean_deg": 3.721752586602525,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_087_custom_segment_057_358",
+          "up_to_scale": {
+            "ate_rmse": 0.03623185921167306,
+            "rta_mean_deg": 1.8303571862210284,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.3618470694733174,
+            "rta_mean_deg": 1.964670946927406,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_523_custom_segment_165_415",
+          "up_to_scale": {
+            "ate_rmse": 0.035414116555701945,
+            "rta_mean_deg": 7.0156565390497025,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.13650298718950596,
+            "rta_mean_deg": 7.3272822588176405,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_122_custom_segment_016_286",
+          "up_to_scale": {
+            "ate_rmse": 0.034811974100115155,
+            "rta_mean_deg": 1.780664258343339,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.18365221555158173,
+            "rta_mean_deg": 3.49725612609027,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_121_custom_segment_023_320",
+          "up_to_scale": {
+            "ate_rmse": 0.034428399888822,
+            "rta_mean_deg": 1.648622741887749,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.21509516506068188,
+            "rta_mean_deg": 3.819735964013827,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_223_custom_segment_172_472",
+          "up_to_scale": {
+            "ate_rmse": 0.03208394881845048,
+            "rta_mean_deg": 3.445362890352002,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.18943816676589545,
+            "rta_mean_deg": 3.2467833514411213,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_496_custom_segment_190_440",
+          "up_to_scale": {
+            "ate_rmse": 0.031334027160456315,
+            "rta_mean_deg": 7.334319364156679,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.20659594291729763,
+            "rta_mean_deg": 7.22609237997929,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_150_custom_segment_057_357",
+          "up_to_scale": {
+            "ate_rmse": 0.026924355899872188,
+            "rta_mean_deg": 1.3992545506207343,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.8645239204702675,
+            "rta_mean_deg": 2.292801838548736,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_188_custom_segment_083_383",
+          "up_to_scale": {
+            "ate_rmse": 0.026767266958805526,
+            "rta_mean_deg": 1.6993207453002257,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.2729878047413124,
+            "rta_mean_deg": 2.2400462614924086,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_138_custom_segment_072_372",
+          "up_to_scale": {
+            "ate_rmse": 0.025842695995505774,
+            "rta_mean_deg": 0.9856754220562726,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.3212525095629464,
+            "rta_mean_deg": 1.744040789644677,
+            "num_heading": 8
+          }
+        }
+      ],
+      "worst_metric": [
+        {
+          "segment": "sample_553_custom_segment_120_370",
+          "up_to_scale": {
+            "ate_rmse": 0.014305106291055532,
+            "rta_mean_deg": 0.8650616482717328,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.7010334664072144,
+            "rta_mean_deg": 0.8699142423197249,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_495_custom_segment_255_505",
+          "up_to_scale": {
+            "ate_rmse": 0.014059457819982251,
+            "rta_mean_deg": 1.3056038604002178,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.6651493461167874,
+            "rta_mean_deg": 1.7994833021070604,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_133_custom_segment_026_326",
+          "up_to_scale": {
+            "ate_rmse": 0.009529406304481928,
+            "rta_mean_deg": 0.5307731348769223,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.3070447663339524,
+            "rta_mean_deg": 0.550835714386662,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_548_custom_segment_362_612",
+          "up_to_scale": {
+            "ate_rmse": 0.013371725697425422,
+            "rta_mean_deg": 0.9019488265689279,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.17473501724518,
+            "rta_mean_deg": 0.7777866618330245,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_538_custom_segment_107_357",
+          "up_to_scale": {
+            "ate_rmse": 0.017273476488034976,
+            "rta_mean_deg": 0.7864417937812385,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.0750817423083778,
+            "rta_mean_deg": 1.192483136072957,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_550_custom_segment_129_379",
+          "up_to_scale": {
+            "ate_rmse": 0.015850858037534128,
+            "rta_mean_deg": 0.990772094962964,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.0712302359377184,
+            "rta_mean_deg": 1.413155477319068,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_549_custom_segment_057_307",
+          "up_to_scale": {
+            "ate_rmse": 0.019022893191829905,
+            "rta_mean_deg": 1.2000082642010297,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.9450633546751207,
+            "rta_mean_deg": 1.9372890440336628,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_344_custom_segment_185_435",
+          "up_to_scale": {
+            "ate_rmse": 0.014822059665168879,
+            "rta_mean_deg": 0.7546665286540071,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.9448948158148784,
+            "rta_mean_deg": 1.2694010881468258,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_532_custom_segment_134_384",
+          "up_to_scale": {
+            "ate_rmse": 0.0165822094719695,
+            "rta_mean_deg": 0.9856162757004017,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.9224648192447994,
+            "rta_mean_deg": 0.9856162757003984,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_466_custom_segment_083_333",
+          "up_to_scale": {
+            "ate_rmse": 0.015351303805401572,
+            "rta_mean_deg": 1.2868040316118783,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.8817271878798817,
+            "rta_mean_deg": 1.3094744396077806,
+            "num_heading": 8
+          }
+        }
+      ]
+    },
+    "MapAnything": {
+      "worst_up_to_scale": [
+        {
+          "segment": "sample_467_custom_segment_087_337",
+          "up_to_scale": {
+            "ate_rmse": 0.0748538700693604,
+            "rta_mean_deg": 2.633983609749345,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.5157702270322577,
+            "rta_mean_deg": 2.7070057229348907,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_302_custom_segment_091_341",
+          "up_to_scale": {
+            "ate_rmse": 0.07417311451844538,
+            "rta_mean_deg": 4.260396513008159,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.3937539373326926,
+            "rta_mean_deg": 4.260396513008172,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_149_custom_segment_119_420",
+          "up_to_scale": {
+            "ate_rmse": 0.0677541437829899,
+            "rta_mean_deg": 1.675024187633023,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.20261820186825252,
+            "rta_mean_deg": 2.0140843611714803,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_254_custom_segment_016_316",
+          "up_to_scale": {
+            "ate_rmse": 0.059240988795847514,
+            "rta_mean_deg": 3.4135433787432596,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.6992398773007488,
+            "rta_mean_deg": 4.398632894724573,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_121_custom_segment_023_320",
+          "up_to_scale": {
+            "ate_rmse": 0.058997197283409235,
+            "rta_mean_deg": 1.327484196097074,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.23159560653042685,
+            "rta_mean_deg": 3.2530142115652474,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_150_custom_segment_057_357",
+          "up_to_scale": {
+            "ate_rmse": 0.05807092318582346,
+            "rta_mean_deg": 1.768676629300349,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.7948798727223271,
+            "rta_mean_deg": 1.9202956418755717,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_087_custom_segment_057_358",
+          "up_to_scale": {
+            "ate_rmse": 0.05774490976801688,
+            "rta_mean_deg": 2.1240345734577923,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.1916199339382901,
+            "rta_mean_deg": 2.6180223979439434,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_208_custom_segment_024_324",
+          "up_to_scale": {
+            "ate_rmse": 0.054164889198761855,
+            "rta_mean_deg": 1.9225841791377225,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.10715780507530706,
+            "rta_mean_deg": 1.893836461030249,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_198_custom_segment_009_310",
+          "up_to_scale": {
+            "ate_rmse": 0.04969384453695283,
+            "rta_mean_deg": 2.294797202405862,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.4590870906340838,
+            "rta_mean_deg": 2.697764839867092,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_389_custom_segment_080_330",
+          "up_to_scale": {
+            "ate_rmse": 0.046446055416972824,
+            "rta_mean_deg": 1.0827913538790561,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.3800255909411174,
+            "rta_mean_deg": 1.179997804207638,
+            "num_heading": 8
+          }
+        }
+      ],
+      "worst_metric": [
+        {
+          "segment": "sample_334_custom_segment_134_384",
+          "up_to_scale": {
+            "ate_rmse": 0.021302450719234544,
+            "rta_mean_deg": 1.341432118382885,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.8803886033395023,
+            "rta_mean_deg": 1.5524398697985142,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_503_custom_segment_450_700",
+          "up_to_scale": {
+            "ate_rmse": 0.028209450591725395,
+            "rta_mean_deg": 1.2612025036522732,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.7035060490337255,
+            "rta_mean_deg": 1.485155925049055,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_276_custom_segment_044_344",
+          "up_to_scale": {
+            "ate_rmse": 0.023348378843209477,
+            "rta_mean_deg": 1.872934266154706,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.4078901767264989,
+            "rta_mean_deg": 2.278841112593953,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_469_custom_segment_074_324",
+          "up_to_scale": {
+            "ate_rmse": 0.019708493118071907,
+            "rta_mean_deg": 1.4911237525481869,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.3300621770335723,
+            "rta_mean_deg": 1.6315354318982465,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_173_custom_segment_067_367",
+          "up_to_scale": {
+            "ate_rmse": 0.03003675475713598,
+            "rta_mean_deg": 2.930525474694254,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.3006591784372021,
+            "rta_mean_deg": 4.69936770480103,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_555_custom_segment_068_318",
+          "up_to_scale": {
+            "ate_rmse": 0.031610501684149674,
+            "rta_mean_deg": 1.8933639832823528,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.298912380258835,
+            "rta_mean_deg": 1.8933639832823497,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_556_custom_segment_021_271",
+          "up_to_scale": {
+            "ate_rmse": 0.044282108766336724,
+            "rta_mean_deg": 2.6218346039274305,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.2862800263581367,
+            "rta_mean_deg": 3.0851626801611802,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_538_custom_segment_107_357",
+          "up_to_scale": {
+            "ate_rmse": 0.03416384809188569,
+            "rta_mean_deg": 0.7712961355611376,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.2618180754378971,
+            "rta_mean_deg": 0.9672440776463146,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_549_custom_segment_057_307",
+          "up_to_scale": {
+            "ate_rmse": 0.018014829443697068,
+            "rta_mean_deg": 1.3542303072354414,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.259252943440182,
+            "rta_mean_deg": 1.6260149413350349,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_172_custom_segment_112_412",
+          "up_to_scale": {
+            "ate_rmse": 0.021078429282584212,
+            "rta_mean_deg": 2.0288770717157263,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.2117614066801656,
+            "rta_mean_deg": 2.192282790491343,
+            "num_heading": 8
+          }
+        }
+      ]
+    },
+    "VGGT": {
+      "worst_up_to_scale": [
+        {
+          "segment": "sample_302_custom_segment_091_341",
+          "up_to_scale": {
+            "ate_rmse": 0.07431534711703734,
+            "rta_mean_deg": 3.886096849974473,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.1139496162963763,
+            "rta_mean_deg": 3.6297110129473342,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_254_custom_segment_016_316",
+          "up_to_scale": {
+            "ate_rmse": 0.04003019461418253,
+            "rta_mean_deg": 1.365412810215169,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.3933199760700641,
+            "rta_mean_deg": 1.80459646308993,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_121_custom_segment_023_320",
+          "up_to_scale": {
+            "ate_rmse": 0.03836719884656667,
+            "rta_mean_deg": 2.1658491866182796,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.26271260545856184,
+            "rta_mean_deg": 3.523434398456472,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_087_custom_segment_057_358",
+          "up_to_scale": {
+            "ate_rmse": 0.03756255282464341,
+            "rta_mean_deg": 1.6998515149028517,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.09988469225545854,
+            "rta_mean_deg": 1.7445878518632858,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_503_custom_segment_450_700",
+          "up_to_scale": {
+            "ate_rmse": 0.03499013908301137,
+            "rta_mean_deg": 1.0879056554847737,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.11952467268117047,
+            "rta_mean_deg": 1.0606185527931786,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_523_custom_segment_165_415",
+          "up_to_scale": {
+            "ate_rmse": 0.034341830309804845,
+            "rta_mean_deg": 8.259887607068178,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.10198994442250262,
+            "rta_mean_deg": 8.41533085182626,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_467_custom_segment_087_337",
+          "up_to_scale": {
+            "ate_rmse": 0.03404075854453466,
+            "rta_mean_deg": 0.8753236474300548,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.4239672806293655,
+            "rta_mean_deg": 0.8144250841976479,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_389_custom_segment_080_330",
+          "up_to_scale": {
+            "ate_rmse": 0.030652434173882727,
+            "rta_mean_deg": 0.9837935849974099,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.07624133762340796,
+            "rta_mean_deg": 1.136813552305218,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_108_custom_segment_041_342",
+          "up_to_scale": {
+            "ate_rmse": 0.02931152268299493,
+            "rta_mean_deg": 1.1647316727833767,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.10740587576291911,
+            "rta_mean_deg": 2.0076495547532125,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_223_custom_segment_172_472",
+          "up_to_scale": {
+            "ate_rmse": 0.029082882026870076,
+            "rta_mean_deg": 2.885095194535064,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.14197063004704527,
+            "rta_mean_deg": 2.936211019246252,
+            "num_heading": 8
+          }
+        }
+      ],
+      "worst_metric": [
+        {
+          "segment": "sample_467_custom_segment_087_337",
+          "up_to_scale": {
+            "ate_rmse": 0.03404075854453466,
+            "rta_mean_deg": 0.8753236474300548,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.4239672806293655,
+            "rta_mean_deg": 0.8144250841976479,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_254_custom_segment_016_316",
+          "up_to_scale": {
+            "ate_rmse": 0.04003019461418253,
+            "rta_mean_deg": 1.365412810215169,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.3933199760700641,
+            "rta_mean_deg": 1.80459646308993,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_528_custom_segment_102_352",
+          "up_to_scale": {
+            "ate_rmse": 0.02784892063831069,
+            "rta_mean_deg": 7.031499331802179,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.359481714950619,
+            "rta_mean_deg": 7.33146214928388,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_149_custom_segment_119_420",
+          "up_to_scale": {
+            "ate_rmse": 0.01563047317913708,
+            "rta_mean_deg": 0.7397021560799835,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.3423781334859724,
+            "rta_mean_deg": 0.9773412952826432,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_195_custom_segment_007_307",
+          "up_to_scale": {
+            "ate_rmse": 0.022820108718567253,
+            "rta_mean_deg": 0.8425766135022719,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.307339611550359,
+            "rta_mean_deg": 1.165215109422501,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_545_custom_segment_049_299",
+          "up_to_scale": {
+            "ate_rmse": 0.014586537525556227,
+            "rta_mean_deg": 1.005675134695096,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.2794567852379816,
+            "rta_mean_deg": 1.354994957774025,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_495_custom_segment_255_505",
+          "up_to_scale": {
+            "ate_rmse": 0.01637638326474385,
+            "rta_mean_deg": 1.3761610792697705,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.26867727982503464,
+            "rta_mean_deg": 1.9862829582892076,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_121_custom_segment_023_320",
+          "up_to_scale": {
+            "ate_rmse": 0.03836719884656667,
+            "rta_mean_deg": 2.1658491866182796,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.26271260545856184,
+            "rta_mean_deg": 3.523434398456472,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_224_custom_segment_157_457",
+          "up_to_scale": {
+            "ate_rmse": 0.01632781060877317,
+            "rta_mean_deg": 1.1378748572294803,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.2466600186377238,
+            "rta_mean_deg": 1.5609799045984603,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_173_custom_segment_067_367",
+          "up_to_scale": {
+            "ate_rmse": 0.02619893952570801,
+            "rta_mean_deg": 2.220798863437446,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.24507456336886033,
+            "rta_mean_deg": 4.70168196196688,
+            "num_heading": 8
+          }
+        }
+      ]
+    },
+    "ViPE": {
+      "worst_up_to_scale": [
+        {
+          "segment": "sample_272_custom_segment_043_343",
+          "up_to_scale": {
+            "ate_rmse": 0.16095705448858597,
+            "rta_mean_deg": 11.484283186664953,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.088172009029767,
+            "rta_mean_deg": 13.426533677644752,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_188_custom_segment_083_383",
+          "up_to_scale": {
+            "ate_rmse": 0.15363839977886135,
+            "rta_mean_deg": 4.1114521495851175,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.45751108428673437,
+            "rta_mean_deg": 8.184241620922055,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_352_custom_segment_217_467",
+          "up_to_scale": {
+            "ate_rmse": 0.12446346507898667,
+            "rta_mean_deg": 8.438969292396786,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.956695674317878,
+            "rta_mean_deg": 8.43896929239679,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_528_custom_segment_102_352",
+          "up_to_scale": {
+            "ate_rmse": 0.1201391200862304,
+            "rta_mean_deg": 9.859683075615624,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.41763473534008017,
+            "rta_mean_deg": 12.764298552379456,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_310_custom_segment_152_402",
+          "up_to_scale": {
+            "ate_rmse": 0.1170987635605562,
+            "rta_mean_deg": 1.4099970555160084,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.1545871461768928,
+            "rta_mean_deg": 1.7599405496490395,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_389_custom_segment_080_330",
+          "up_to_scale": {
+            "ate_rmse": 0.11407088457489874,
+            "rta_mean_deg": 8.752804777246077,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.5768427736662636,
+            "rta_mean_deg": 8.459767841687592,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_231_custom_segment_062_362",
+          "up_to_scale": {
+            "ate_rmse": 0.1069139052581364,
+            "rta_mean_deg": 3.517253915170976,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.7622327864224328,
+            "rta_mean_deg": 8.705125560685119,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_130_custom_segment_000_297",
+          "up_to_scale": {
+            "ate_rmse": 0.09673932681687086,
+            "rta_mean_deg": 4.397351158060793,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.6536902624185761,
+            "rta_mean_deg": 4.664917188307477,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_362_custom_segment_083_333",
+          "up_to_scale": {
+            "ate_rmse": 0.09584385096507826,
+            "rta_mean_deg": 1.689799216576223,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 0.33925718982956865,
+            "rta_mean_deg": 7.920460580209762,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_349_custom_segment_128_378",
+          "up_to_scale": {
+            "ate_rmse": 0.09400114577894447,
+            "rta_mean_deg": 6.833895454463421,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.1229054033579169,
+            "rta_mean_deg": 9.26902827284201,
+            "num_heading": 8
+          }
+        }
+      ],
+      "worst_metric": [
+        {
+          "segment": "sample_532_custom_segment_134_384",
+          "up_to_scale": {
+            "ate_rmse": 0.018838370973617024,
+            "rta_mean_deg": 1.228847941353017,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 2.938963576133077,
+            "rta_mean_deg": 1.340910708111058,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_553_custom_segment_120_370",
+          "up_to_scale": {
+            "ate_rmse": 0.02609049790802068,
+            "rta_mean_deg": 1.4692959207768739,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 2.6860364309461966,
+            "rta_mean_deg": 1.5166416103359484,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_133_custom_segment_026_326",
+          "up_to_scale": {
+            "ate_rmse": 0.022368425368603055,
+            "rta_mean_deg": 0.3597752853853583,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 2.425214421918086,
+            "rta_mean_deg": 0.3467787846076427,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_538_custom_segment_107_357",
+          "up_to_scale": {
+            "ate_rmse": 0.017527827634339393,
+            "rta_mean_deg": 0.7586050417166605,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 2.237879392668217,
+            "rta_mean_deg": 0.8042025110192665,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_486_custom_segment_368_618",
+          "up_to_scale": {
+            "ate_rmse": 0.030475851169019644,
+            "rta_mean_deg": 1.3311713136438121,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 2.1988173613977926,
+            "rta_mean_deg": 1.3311713136438121,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_495_custom_segment_255_505",
+          "up_to_scale": {
+            "ate_rmse": 0.03797867931156758,
+            "rta_mean_deg": 1.5177261900082903,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 2.087752255696181,
+            "rta_mean_deg": 3.4824533231337274,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_503_custom_segment_450_700",
+          "up_to_scale": {
+            "ate_rmse": 0.014878979022908299,
+            "rta_mean_deg": 1.202544502324689,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 2.0642921635470914,
+            "rta_mean_deg": 1.258365730430997,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_548_custom_segment_362_612",
+          "up_to_scale": {
+            "ate_rmse": 0.016527860617704313,
+            "rta_mean_deg": 1.0253194682048732,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.9051607409666278,
+            "rta_mean_deg": 1.0253194682048763,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_555_custom_segment_068_318",
+          "up_to_scale": {
+            "ate_rmse": 0.07013001704385988,
+            "rta_mean_deg": 0.8921939828999549,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.5895095899880602,
+            "rta_mean_deg": 1.0617342553861269,
+            "num_heading": 8
+          }
+        },
+        {
+          "segment": "sample_389_custom_segment_080_330",
+          "up_to_scale": {
+            "ate_rmse": 0.11407088457489874,
+            "rta_mean_deg": 8.752804777246077,
+            "num_heading": 8
+          },
+          "metric": {
+            "ate_rmse": 1.5768427736662636,
+            "rta_mean_deg": 8.459767841687592,
+            "num_heading": 8
+          }
+        }
+      ]
+    }
+  }
+}

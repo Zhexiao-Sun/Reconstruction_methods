@@ -1,0 +1,168 @@
+{
+  "source_summary": "/home/zhexiao/MA/2.Versuch/Reconstruction_methods/Comparative_tests/eval_outputs_with_VGGT/trajectory_metrics_summary.json",
+  "generated_at": "2026-02-05T16:38:56",
+  "auc_deg": [
+    5,
+    10
+  ],
+  "up_to_scale": {
+    "models": {
+      "VGGT": {
+        "ate_mean": 0.01987095731053476,
+        "auc": {
+          "auc_5deg": 0.8362,
+          "auc_10deg": 0.9108
+        },
+        "auc_pct": {
+          "auc_5deg": 83.62,
+          "auc_10deg": 91.08000000000001
+        }
+      },
+      "Any4D": {
+        "ate_mean": 0.05902153470301454,
+        "auc": {
+          "auc_5deg": 0.6184000000000001,
+          "auc_10deg": 0.7826000000000001
+        },
+        "auc_pct": {
+          "auc_5deg": 61.84,
+          "auc_10deg": 78.26
+        }
+      },
+      "ViPE": {
+        "ate_mean": 0.04810587112284453,
+        "auc": {
+          "auc_5deg": 0.5843999999999999,
+          "auc_10deg": 0.7434999999999998
+        },
+        "auc_pct": {
+          "auc_5deg": 58.43999999999999,
+          "auc_10deg": 74.34999999999998
+        }
+      },
+      "MapAnything": {
+        "ate_mean": 0.02970432607469005,
+        "auc": {
+          "auc_5deg": 0.7616,
+          "auc_10deg": 0.8699
+        },
+        "auc_pct": {
+          "auc_5deg": 76.16000000000001,
+          "auc_10deg": 86.99
+        }
+      },
+      "DA3": {
+        "ate_mean": 0.016569482078775497,
+        "auc": {
+          "auc_5deg": 0.8486,
+          "auc_10deg": 0.9169000000000003
+        },
+        "auc_pct": {
+          "auc_5deg": 84.86,
+          "auc_10deg": 91.69000000000003
+        }
+      }
+    }
+  },
+  "metric": {
+    "models": {
+      "VGGT": {
+        "ate_mean": 0.12382528152189556,
+        "auc": {
+          "auc_5deg": 0.7534,
+          "auc_10deg": 0.8687999999999999
+        },
+        "auc_pct": {
+          "auc_5deg": 75.33999999999999,
+          "auc_10deg": 86.88
+        }
+      },
+      "Any4D": {
+        "ate_mean": 2.6691837104933964,
+        "auc": {
+          "auc_5deg": 0.5449999999999999,
+          "auc_10deg": 0.7324999999999999
+        },
+        "auc_pct": {
+          "auc_5deg": 54.49999999999999,
+          "auc_10deg": 73.25
+        }
+      },
+      "ViPE": {
+        "ate_mean": 0.8081860278627316,
+        "auc": {
+          "auc_5deg": 0.45120000000000005,
+          "auc_10deg": 0.6284
+        },
+        "auc_pct": {
+          "auc_5deg": 45.120000000000005,
+          "auc_10deg": 62.839999999999996
+        }
+      },
+      "MapAnything": {
+        "ate_mean": 0.5168304332965827,
+        "auc": {
+          "auc_5deg": 0.6978,
+          "auc_10deg": 0.8362
+        },
+        "auc_pct": {
+          "auc_5deg": 69.78,
+          "auc_10deg": 83.62
+        }
+      },
+      "DA3": {
+        "ate_mean": 0.4513928259570944,
+        "auc": {
+          "auc_5deg": 0.7472,
+          "auc_10deg": 0.8641
+        },
+        "auc_pct": {
+          "auc_5deg": 74.72,
+          "auc_10deg": 86.41
+        }
+      }
+    }
+  },
+  "table_rows": [
+    {
+      "method": "VGGT",
+      "metric_supported": false,
+      "up_to_scale_ate_mean": 0.01987095731053476,
+      "up_to_scale_auc_pct": 91.08000000000001,
+      "metric_ate_mean": 0.12382528152189556,
+      "metric_auc_pct": 86.88
+    },
+    {
+      "method": "Any4D",
+      "metric_supported": true,
+      "up_to_scale_ate_mean": 0.05902153470301454,
+      "up_to_scale_auc_pct": 78.26,
+      "metric_ate_mean": 2.6691837104933964,
+      "metric_auc_pct": 73.25
+    },
+    {
+      "method": "ViPE",
+      "metric_supported": true,
+      "up_to_scale_ate_mean": 0.04810587112284453,
+      "up_to_scale_auc_pct": 74.34999999999998,
+      "metric_ate_mean": 0.8081860278627316,
+      "metric_auc_pct": 62.839999999999996
+    },
+    {
+      "method": "MapAnything",
+      "metric_supported": true,
+      "up_to_scale_ate_mean": 0.02970432607469005,
+      "up_to_scale_auc_pct": 86.99,
+      "metric_ate_mean": 0.5168304332965827,
+      "metric_auc_pct": 83.62
+    },
+    {
+      "method": "DA3",
+      "metric_supported": true,
+      "up_to_scale_ate_mean": 0.016569482078775497,
+      "up_to_scale_auc_pct": 91.69000000000003,
+      "metric_ate_mean": 0.4513928259570944,
+      "metric_auc_pct": 86.41
+    }
+  ]
+}
