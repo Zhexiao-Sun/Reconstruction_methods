@@ -77,6 +77,44 @@ def _as_traj(points) -> np.ndarray:
     return arr
 
 
+def _sim2_umeyama(src: np.ndarray, dst: np.ndarray, eps: float = 1e-9) -> Tuple[float, np.ndarray, np.ndarray]:
+    """
+    Estimate Sim(2) transform (scale, rotation, translation) from src to dst.
+
+    这里直接复用 evaluate_trajectory_metrics.py 中的实现，保证 Up-to-scale (Sim2)
+    对齐方式完全一致。
+    """
+    if len(src) != len(dst):
+        n = min(len(src), len(dst))
+        src = src[:n]
+        dst = dst[:n]
+    mean_src = src.mean(axis=0)
+    mean_dst = dst.mean(axis=0)
+    src_c = src - mean_src
+    dst_c = dst - mean_dst
+
+    var_src = np.mean(np.sum(src_c**2, axis=1))
+    if var_src < eps:
+        scale = 1.0
+        R = np.eye(2)
+        t = mean_dst - mean_src
+        return scale, R, t
+
+    cov = (dst_c.T @ src_c) / len(src)
+    U, S, Vt = np.linalg.svd(cov)
+    d = np.sign(np.linalg.det(U) * np.linalg.det(Vt))
+    S_mat = np.eye(2)
+    S_mat[-1, -1] = d
+    R = U @ S_mat @ Vt
+    scale = (S * np.diag(S_mat)).sum() / var_src
+    t = mean_dst - scale * (R @ mean_src)
+    return float(scale), R, t
+
+
+def _apply_sim2(src: np.ndarray, scale: float, R: np.ndarray, t: np.ndarray) -> np.ndarray:
+    return scale * (src @ R.T) + t
+
+
 def _select_topk_frequent(worst_json: dict, key: str, topk: int) -> List[Tuple[str, int, List[str]]]:
     """
     key: 'worst_up_to_scale' or 'worst_metric'
@@ -137,6 +175,7 @@ def _plot_multi(
 
     cmap = plt.get_cmap("tab10")
     model_names = sorted(pred_by_model.keys(), key=str.lower)
+
     for i, m in enumerate(model_names):
         pred = pred_by_model[m]
         color = cmap(i % 10)
@@ -168,10 +207,106 @@ def _plot_multi(
     if y_range > 0:
         ax.set_ylim(min_y - 0.08 * y_range, max_y + 0.08 * y_range)
 
-    ax.set_xlabel("X (meters)", fontsize=30)
-    ax.set_ylabel("Y (meters)", fontsize=30)
+    # 让标题、坐标轴 label 和图之间稍微拉开一点距离，
+    # 对齐 plot_ATE_per_segment_cdf.py 中的风格
+    ax.set_xlabel("X (meters)", fontsize=30, labelpad=10)
+    ax.set_ylabel("Y (meters)", fontsize=30, labelpad=10)
     ax.set_title(f"Hard Case Trajectory Comparison\n{segment}", fontsize=36, pad=20)
-    ax.tick_params(axis="both", labelsize=26)
+    ax.tick_params(axis="both", labelsize=26, pad=6)
+    ax.legend(loc="center left", bbox_to_anchor=(1, 0.5), fontsize=22)
+    ax.axis("equal")
+    ax.grid(True, alpha=0.3)
+    plt.tight_layout()
+
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    plt.savefig(output_path, dpi=300, bbox_inches="tight")
+    plt.close(fig)
+
+
+def _plot_multi_sim2(
+    segment: str,
+    gt: np.ndarray,
+    pred_by_model: Dict[str, np.ndarray],
+    output_path: str,
+) -> None:
+    """
+    额外画一张 Up-to-scale (Sim2 aligned) 的多模型对比图：
+    - 仍然包含同一段轨迹的 GT
+    - 但 5 个模型使用 Sim(2) 对齐后的轨迹
+    """
+    import matplotlib.pyplot as plt
+
+    fig, ax = plt.subplots(figsize=(12, 10))
+
+    # Ground truth
+    ax.plot(gt[:, 0], gt[:, 1], "k--", linewidth=3, label="Ground Truth", zorder=10)
+    ax.scatter(
+        gt[0, 0],
+        gt[0, 1],
+        color="green",
+        s=200,
+        marker="o",
+        edgecolors="black",
+        linewidth=2,
+        label="GT Start",
+        zorder=11,
+    )
+    ax.scatter(
+        gt[-1, 0],
+        gt[-1, 1],
+        color="red",
+        s=200,
+        marker="s",
+        edgecolors="black",
+        linewidth=2,
+        label="GT End",
+        zorder=11,
+    )
+
+    cmap = plt.get_cmap("tab10")
+    model_names = sorted(pred_by_model.keys(), key=str.lower)
+
+    aligned_by_model: Dict[str, np.ndarray] = {}
+    for m in model_names:
+        pred = pred_by_model[m]
+        scale, R, t = _sim2_umeyama(pred, gt)
+        aligned_by_model[m] = _apply_sim2(pred, scale, R, t)
+
+    for i, m in enumerate(model_names):
+        pred_aligned = aligned_by_model[m]
+        color = cmap(i % 10)
+        ax.plot(
+            pred_aligned[:, 0],
+            pred_aligned[:, 1],
+            "-",
+            color=color,
+            linewidth=2,
+            alpha=0.95,
+            label=f"{m} Sim(2)",
+            zorder=7,
+        )
+        ax.scatter(pred_aligned[0, 0], pred_aligned[0, 1], color=color, s=80, marker="o", zorder=8)
+        ax.scatter(pred_aligned[-1, 0], pred_aligned[-1, 1], color=color, s=80, marker="s", zorder=8)
+
+    # limits：这里用对齐后的轨迹范围
+    all_x = gt[:, 0].tolist()
+    all_y = gt[:, 1].tolist()
+    for pred_aligned in aligned_by_model.values():
+        all_x.extend(pred_aligned[:, 0].tolist())
+        all_y.extend(pred_aligned[:, 1].tolist())
+    min_x, max_x = min(all_x), max(all_x)
+    min_y, max_y = min(all_y), max(all_y)
+    x_range = max_x - min_x
+    y_range = max_y - min_y
+    if x_range > 0:
+        ax.set_xlim(min_x - 0.05 * x_range, max_x + 0.08 * x_range)
+    if y_range > 0:
+        ax.set_ylim(min_y - 0.08 * y_range, max_y + 0.08 * y_range)
+
+    ax.set_xlabel("X (meters)", fontsize=30, labelpad=10)
+    ax.set_ylabel("Y (meters)", fontsize=30, labelpad=10)
+    ax.set_title(f"Hard Case Trajectory Comparison (Sim2 aligned)\n{segment}", fontsize=36, pad=20)
+    ax.tick_params(axis="both", labelsize=26, pad=6)
     ax.legend(loc="center left", bbox_to_anchor=(1, 0.5), fontsize=22)
     ax.axis("equal")
     ax.grid(True, alpha=0.3)
@@ -264,8 +399,14 @@ def main() -> None:
                     # still plot using the first GT; differences may come from float formatting
                     pass
 
-        out_path = os.path.join(out_dir, f"{seg}.png")
-        _plot_multi(seg, gt, preds, out_path)
+        # 一段 sample 生成两张图：
+        # 1）raw waypoints vs GT
+        # 2）Up-to-scale (Sim2 aligned) vs GT
+        out_path_raw = os.path.join(out_dir, f"{seg}.png")
+        _plot_multi(seg, gt, preds, out_path_raw)
+
+        out_path_sim2 = os.path.join(out_dir, f"{seg}_sim2.png")
+        _plot_multi_sim2(seg, gt, preds, out_path_sim2)
 
     print(f"✓ Saved plots to: {out_dir}")
 

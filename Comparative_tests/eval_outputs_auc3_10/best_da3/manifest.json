@@ -1,0 +1,65 @@
+{
+  "generated_at": "2026-02-09T16:53:28",
+  "eval_dir": "/home/zhexiao/MA/2.Versuch/Reconstruction_methods/Comparative_tests/eval_outputs_auc3_10",
+  "metric_csv": "/home/zhexiao/MA/2.Versuch/Reconstruction_methods/Comparative_tests/eval_outputs_auc3_10/metric_per_segment.csv",
+  "da3_model_name": "DA3",
+  "topk": 8,
+  "selected": [
+    {
+      "segment": "sample_351_custom_segment_152_402",
+      "ate_rmse": 0.04809360726844133,
+      "rta_mean_deg": 0.5089227332687296,
+      "num_heading": 8
+    },
+    {
+      "segment": "sample_126_custom_segment_088_385",
+      "ate_rmse": 0.0685762995569943,
+      "rta_mean_deg": 2.206788851822769,
+      "num_heading": 8
+    },
+    {
+      "segment": "sample_306_custom_segment_111_361",
+      "ate_rmse": 0.07320877667595728,
+      "rta_mean_deg": 1.523066394494912,
+      "num_heading": 8
+    },
+    {
+      "segment": "sample_469_custom_segment_074_324",
+      "ate_rmse": 0.07699801919792072,
+      "rta_mean_deg": 1.5498700454956817,
+      "num_heading": 8
+    },
+    {
+      "segment": "sample_342_custom_segment_083_333",
+      "ate_rmse": 0.07726827917903017,
+      "rta_mean_deg": 1.917777736072872,
+      "num_heading": 8
+    },
+    {
+      "segment": "sample_130_custom_segment_000_297",
+      "ate_rmse": 0.09154304910481727,
+      "rta_mean_deg": 1.4531693925808682,
+      "num_heading": 8
+    },
+    {
+      "segment": "sample_175_custom_segment_096_396",
+      "ate_rmse": 0.11660572664610401,
+      "rta_mean_deg": 1.1162116192034628,
+      "num_heading": 8
+    },
+    {
+      "segment": "sample_497_custom_segment_281_531",
+      "ate_rmse": 0.12103459191477732,
+      "rta_mean_deg": 1.2255818016009448,
+      "num_heading": 8
+    }
+  ],
+  "model_jsons": [
+    "/home/zhexiao/MA/2.Versuch/Reconstruction_methods/Comparative_tests/any4d/evaluation_results_any4d_20260117_184404.json",
+    "/home/zhexiao/MA/2.Versuch/Reconstruction_methods/Comparative_tests/da3/evaluation_results_20260129_185138.json",
+    "/home/zhexiao/MA/2.Versuch/Reconstruction_methods/Comparative_tests/mapanything/evaluation_results_20260130_181931.json",
+    "/home/zhexiao/MA/2.Versuch/Reconstruction_methods/Comparative_tests/vggt/evaluation_results_20251113_152448.json",
+    "/home/zhexiao/MA/2.Versuch/Reconstruction_methods/Comparative_tests/vipe/evaluation_results_20251113_145409.json"
+  ],
+  "outputs": "two plots per segment: DA3_vs_GT, all_models_vs_GT"
+}

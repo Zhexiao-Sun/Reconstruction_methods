@@ -1,0 +1,117 @@
+{
+  "generated_at": "2026-02-06T16:47:08",
+  "worst_json": "/home/zhexiao/MA/2.Versuch/Reconstruction_methods/Comparative_tests/eval_outputs_auc3_10/worst10_by_model.json",
+  "topk": 5,
+  "up_to_scale_top": [
+    {
+      "segment": "sample_087_custom_segment_057_358",
+      "freq": 3,
+      "models": [
+        "DA3",
+        "MapAnything",
+        "VGGT"
+      ]
+    },
+    {
+      "segment": "sample_121_custom_segment_023_320",
+      "freq": 3,
+      "models": [
+        "DA3",
+        "MapAnything",
+        "VGGT"
+      ]
+    },
+    {
+      "segment": "sample_150_custom_segment_057_357",
+      "freq": 3,
+      "models": [
+        "Any4D",
+        "DA3",
+        "MapAnything"
+      ]
+    },
+    {
+      "segment": "sample_302_custom_segment_091_341",
+      "freq": 3,
+      "models": [
+        "DA3",
+        "MapAnything",
+        "VGGT"
+      ]
+    },
+    {
+      "segment": "sample_389_custom_segment_080_330",
+      "freq": 3,
+      "models": [
+        "MapAnything",
+        "VGGT",
+        "ViPE"
+      ]
+    }
+  ],
+  "metric_top": [
+    {
+      "segment": "sample_495_custom_segment_255_505",
+      "freq": 3,
+      "models": [
+        "DA3",
+        "VGGT",
+        "ViPE"
+      ]
+    },
+    {
+      "segment": "sample_503_custom_segment_450_700",
+      "freq": 3,
+      "models": [
+        "Any4D",
+        "MapAnything",
+        "ViPE"
+      ]
+    },
+    {
+      "segment": "sample_532_custom_segment_134_384",
+      "freq": 3,
+      "models": [
+        "Any4D",
+        "DA3",
+        "ViPE"
+      ]
+    },
+    {
+      "segment": "sample_538_custom_segment_107_357",
+      "freq": 3,
+      "models": [
+        "DA3",
+        "MapAnything",
+        "ViPE"
+      ]
+    },
+    {
+      "segment": "sample_133_custom_segment_026_326",
+      "freq": 2,
+      "models": [
+        "DA3",
+        "ViPE"
+      ]
+    }
+  ],
+  "segments_plotted": [
+    "sample_087_custom_segment_057_358",
+    "sample_121_custom_segment_023_320",
+    "sample_150_custom_segment_057_357",
+    "sample_302_custom_segment_091_341",
+    "sample_389_custom_segment_080_330",
+    "sample_495_custom_segment_255_505",
+    "sample_503_custom_segment_450_700",
+    "sample_532_custom_segment_134_384",
+    "sample_538_custom_segment_107_357",
+    "sample_133_custom_segment_026_326"
+  ],
+  "model_jsons": [
+    "/home/zhexiao/MA/2.Versuch/Reconstruction_methods/Comparative_tests/any4d/evaluation_results_any4d_20260117_184404.json",
+    "/home/zhexiao/MA/2.Versuch/Reconstruction_methods/Comparative_tests/da3/evaluation_results_20260129_185138.json",
+    "/home/zhexiao/MA/2.Versuch/Reconstruction_methods/Comparative_tests/mapanything/evaluation_results_20260130_181931.json",
+    "/home/zhexiao/MA/2.Versuch/Reconstruction_methods/Comparative_tests/vggt/evaluation_results_20251113_152448.json",
+    "/home/zhexiao/MA/2.Versuch/Reconstruction_methods/Comparative_tests/vipe/evaluation_results_20251113_145409.json"
+  ]
+}
