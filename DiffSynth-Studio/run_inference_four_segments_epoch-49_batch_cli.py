@@ -4,7 +4,9 @@ python run_inference_four_segments_epoch-49_batch_cli.py --no-cpu-offload --cfg-
 """
 import argparse
 import csv
+import os
 import re
+import time
 from pathlib import Path
 
 import torch
@@ -39,6 +41,9 @@ FPS = 15
 QUALITY = 5
 SEED = 1
 NEGATIVE_PROMPT = DEFAULT_NEGATIVE_PROMPT
+WAN_MODEL_ID = "Wan-AI/Wan2.2-TI2V-5B"
+TOKENIZER_MODEL_ID = "Wan-AI/Wan2.1-T2V-1.3B"
+LOCAL_MODEL_PATH = Path(os.getenv("WAN_MODELS_DIR", "/openbayes/input/input0/DiffSynth-Studio/models"))
 
 
 def parse_args():
@@ -87,15 +92,42 @@ def infer_output_dir(explicit: Path | None, lora_path: Path | None, num_frames: 
 
 
 def build_pipeline(lora_path: Path | None, lora_alpha: float, cpu_offload: bool):
+    os.environ.setdefault("MODELSCOPE_OFFLINE", "1")
     offload_device = "cpu" if cpu_offload else None
+    tokenizer_config = ModelConfig(
+        model_id=TOKENIZER_MODEL_ID,
+        origin_file_pattern="google/*",
+        local_model_path=str(LOCAL_MODEL_PATH),
+        skip_download=True,
+    )
     pipe = WanVideoPipeline.from_pretrained(
         torch_dtype=torch.bfloat16,
         device="cuda",
         model_configs=[
-            ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B", origin_file_pattern="models_t5_umt5-xxl-enc-bf16.pth", offload_device=offload_device),
-            ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B", origin_file_pattern="diffusion_pytorch_model*.safetensors", offload_device=offload_device),
-            ModelConfig(model_id="Wan-AI/Wan2.2-TI2V-5B", origin_file_pattern="Wan2.2_VAE.pth", offload_device=offload_device),
+            ModelConfig(
+                model_id=WAN_MODEL_ID,
+                origin_file_pattern="models_t5_umt5-xxl-enc-bf16.pth",
+                offload_device=offload_device,
+                local_model_path=str(LOCAL_MODEL_PATH),
+                skip_download=True,
+            ),
+            ModelConfig(
+                model_id=WAN_MODEL_ID,
+                origin_file_pattern="diffusion_pytorch_model*.safetensors",
+                offload_device=offload_device,
+                local_model_path=str(LOCAL_MODEL_PATH),
+                skip_download=True,
+            ),
+            ModelConfig(
+                model_id=WAN_MODEL_ID,
+                origin_file_pattern="Wan2.2_VAE.pth",
+                offload_device=offload_device,
+                local_model_path=str(LOCAL_MODEL_PATH),
+                skip_download=True,
+            ),
         ],
+        tokenizer_config=tokenizer_config,
+        redirect_common_files=True,
     )
     if lora_path:
         pipe.load_lora(pipe.dit, str(lora_path), alpha=lora_alpha)
@@ -109,11 +141,15 @@ def build_pipeline(lora_path: Path | None, lora_alpha: float, cpu_offload: bool)
 
 def main():
     args = parse_args()
+    total_start = time.perf_counter()
     output_dir = infer_output_dir(OUTPUT_DIR, LORA_PATH, NUM_FRAMES)
     output_dir.mkdir(parents=True, exist_ok=True)
     print(f"[info] Saving outputs to: {output_dir}")
+    print(f"[info] Loading Wan models from: {LOCAL_MODEL_PATH}")
 
+    load_start = time.perf_counter()
     pipe = build_pipeline(LORA_PATH, LORA_ALPHA, cpu_offload=args.cpu_offload)
+    print(f"[timing] Pipeline load: {time.perf_counter() - load_start:.2f}s")
 
     with METADATA_PATH.open("r", encoding="utf-8") as f:
         entries = list(csv.DictReader(f))
@@ -128,6 +164,7 @@ def main():
         seed = SEED + idx
         output_path = output_dir / f"{Path(row['image']).stem}.mp4"
 
+        infer_start = time.perf_counter()
         video = pipe(
             prompt=row["prompt"],
             negative_prompt=NEGATIVE_PROMPT,
@@ -140,7 +177,17 @@ def main():
             cfg_merge=args.cfg_merge,
             num_inference_steps=args.num_inference_steps,  # 运行时可调（例如 30）以测试速度/质量
         )
+        infer_elapsed = time.perf_counter() - infer_start
+
+        save_start = time.perf_counter()
         save_video(video, str(output_path), fps=FPS, quality=QUALITY)
+        save_elapsed = time.perf_counter() - save_start
+        print(
+            f"[timing] {output_path.name}: inference={infer_elapsed:.2f}s, "
+            f"save={save_elapsed:.2f}s, total={infer_elapsed + save_elapsed:.2f}s"
+        )
+
+    print(f"[timing] Script total: {time.perf_counter() - total_start:.2f}s")
 
 
 if __name__ == "__main__":

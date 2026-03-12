@@ -10,11 +10,9 @@ import json
 import re
 import time
 from pathlib import Path
-from tempfile import NamedTemporaryFile
 from threading import Lock
-from zipfile import ZIP_DEFLATED, ZipFile
 
-from fastapi import BackgroundTasks, FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 
 from .schemas import InferWaypointsRequest, InferWaypointsResponse
@@ -51,62 +49,10 @@ def _validate_request_id(request_id: str) -> None:
         raise HTTPException(status_code=400, detail="Invalid request_id")
 
 
-def _make_requests_zip(runtime_root: Path) -> Path:
-    tmp = NamedTemporaryFile(delete=False, suffix=".zip")
-    zip_path = Path(tmp.name)
-    tmp.close()
-    with ZipFile(zip_path, "w", compression=ZIP_DEFLATED) as zf:
-        if runtime_root.exists():
-            for p in runtime_root.rglob("*"):
-                if p.is_file():
-                    zf.write(p, arcname=str(p.relative_to(runtime_root)))
-    return zip_path
-
-
-@app.get("/requests", response_model=None)
-def get_requests(
-    background_tasks: BackgroundTasks,
-    download: bool = Query(False, description="若为 true，则打包整个 runtime/requests 为 zip 并下载"),
-    include_files: bool = Query(False, description="若为 true，则返回每个 request 目录下的文件列表"),
-    limit: int = Query(200, ge=1, le=2000, description="最多返回多少个 request 目录（按名称倒序）"),
-) -> dict | FileResponse:
-    runtime_root = Path(cfg.runtime_root)
-
-    if download:
-        zip_path = _make_requests_zip(runtime_root)
-        background_tasks.add_task(zip_path.unlink, missing_ok=True)
-        return FileResponse(str(zip_path), media_type="application/zip", filename="requests.zip")
-
-    if not runtime_root.exists():
-        return {"runtime_root": str(runtime_root), "requests": []}
-
-    req_dirs = [
-        p
-        for p in runtime_root.iterdir()
-        if p.is_dir() and re.fullmatch(r"[0-9]{8}_[0-9]{6}_[0-9a-f]{8}", p.name)
-    ]
-    req_dirs.sort(key=lambda p: p.name, reverse=True)
-    req_dirs = req_dirs[: int(limit)]
-
-    if include_files:
-        return {
-            "runtime_root": str(runtime_root),
-            "requests": [
-                {
-                    "request_id": p.name,
-                    "files": sorted([x.name for x in p.iterdir() if x.is_file()]),
-                }
-                for p in req_dirs
-            ],
-        }
-
-    return {"runtime_root": str(runtime_root), "requests": [p.name for p in req_dirs]}
-
-
 @app.get("/requests/{request_id}/result.json")
 def get_result_json(request_id: str):
     _validate_request_id(request_id)
-    req_dir = Path(cfg.runtime_root) / request_id
+    req_dir = Path("/openbayes/home/Reconstruction_methods/runtime/requests") / request_id
     result_path = req_dir / "result.json"
     if not result_path.exists():
         raise HTTPException(status_code=404, detail="result.json not found")
@@ -116,7 +62,7 @@ def get_result_json(request_id: str):
 @app.get("/requests/{request_id}/wan_output.mp4")
 def download_wan_output_mp4(request_id: str):
     _validate_request_id(request_id)
-    req_dir = Path(cfg.runtime_root) / request_id
+    req_dir = Path("/openbayes/home/Reconstruction_methods/runtime/requests") / request_id
     video_path = req_dir / "wan_output.mp4"
     if not video_path.exists():
         raise HTTPException(status_code=404, detail="wan_output.mp4 not found")
